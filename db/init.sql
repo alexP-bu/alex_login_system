@@ -7,8 +7,8 @@ DROP TABLE IS EXISTS salts;
 CREATE TABLE users(
     id INTEGER NOT NULL,
     username VARCHAR(255),
-    firstname VARCHAR(255),
     pwhash VARCHAR(255),
+    firstname VARCHAR(255),
     email VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),

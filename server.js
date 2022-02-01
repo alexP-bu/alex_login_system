@@ -1,9 +1,13 @@
 import express from 'express'
 import path from 'path'
+import mysql from 'mysql'
 
 const app = express();
 const router = express.Router();
 const PORT = 8080;
+
+//database setup
+
 
 app.use('/', router);
 app.use(express.static(path.resolve('./views/css')));
