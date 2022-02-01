@@ -1,0 +1,163 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+}
+body{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.newProfile{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    row-gap: 5px;
+    column-gap: 10px;
+    grid-template-areas: 
+    "formLabel formLabel formLabel"
+    "errorText errorText errorText"
+    "labelName inputName ."
+    "labelHeight inputHeight labelUnit"
+    "labelGender select ."
+    ". . ."
+    "submit submit submit"
+    "loginText loginText loginText";
+    border: 2px solid black;
+    padding: 2.5vh;
+}
+.newProfile input{
+    padding: 3px;
+}
+.errorText{
+    grid-area: errorText;
+    text-align: center;
+}
+.formLabel{
+    grid-area: formLabel;
+    text-decoration: underline;
+    font-size: 1.5rem;
+    text-align: center;
+    text-underline-offset: 0.5rem;
+}
+.labelName{
+    grid-area: labelName;
+}
+.labelHeight{
+    grid-area: labelHeight;
+}
+.inputName{
+    grid-area: inputName;
+}
+.inputHeight{
+    grid-area: inputHeight;
+}
+.labelUnit{
+    grid-area: labelUnit;
+    font-size: 0.75rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.labelGender{
+    grid-area: labelGender;
+}
+.submitButton{
+    grid-area: submit;
+    border: 0.10rem solid black;
+    background: rgb(155, 155, 155);
+    cursor: pointer;
+    font: inherit
+}
+.submitButton:hover{
+    background-color: rgb(211, 211, 211);
+}
+.loginText{
+    grid-area: loginText;
+    font-size: 0.85rem;
+    text-align: center;
+}
+.newProfile select{
+    grid-area: select;
+}
+
+.loginProfile{
+    border: 2px solid black;
+    padding: 2.5vh;
+    display: grid;
+    grid-template-columns: .15fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    row-gap: 5px;
+    column-gap: 10px;
+    grid-template-areas: 
+    "formLabel formLabel"
+    "invalidLoginText invalidLoginText"
+    "labelName enterName"
+    ". ."
+    "submitLogin submitLogin"
+    "createText createText";
+}
+.submitLoginButton{
+    grid-area: submitLogin;
+    border: 0.10rem solid black;
+    background: rgb(155, 155, 155);
+    cursor: pointer;
+    font: inherit
+}
+.submitLoginButton:hover{
+    background-color: rgb(211, 211, 211);
+}
+.enterName{
+    grid-area: enterName;
+    padding: 0.25rem;
+}
+.labelName{
+    display: flex;
+    align-items: center;
+}
+.createText{
+    grid-area: createText;
+    font-size: 0.85rem;
+    text-align: center;
+}
+.invalidLoginText{
+    grid-area: invalidLoginText;
+    text-align: center;
+}
+
+.profile ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.profile h3{
+    font-size: 1.5rem;
+    text-decoration: underline;
+    text-underline-offset: 0.5rem;
+}
+.profile li p{
+    display: inline-block
+}
+.profile li{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.profile li:first-child{
+    margin-top: 1vh;
+}
+.profile li:last-child{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

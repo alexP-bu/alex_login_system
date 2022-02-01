@@ -1,0 +1,29 @@
+{
+  "name": "socialnetwork",
+  "version": "1.0.0",
+  "description": "Alex's Social Network App",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "npx nodemon -L server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexP-bu/socialnetwork.git"
+  },
+  "author": "Alexander Pozin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexP-bu/socialnetwork/issues"
+  },
+  "homepage": "https://github.com/alexP-bu/socialnetwork#readme",
+  "dependencies": {
+    "dotenv": "^14.3.0",
+    "express": "^4.17.2",
+    "mysql2": "^2.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
