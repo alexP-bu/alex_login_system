@@ -4,6 +4,8 @@ class User{
         this.username = username;
         this.firstname = firstName;
         this.email = email;
-        this.TIMESTAMP_RETRIEVED = new Date().toLocaleString();
+        this.created_at;
     }
 }
+
+export default User;

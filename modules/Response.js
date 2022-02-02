@@ -7,3 +7,5 @@ class Response {
         this.timestamp = new Date().toLocaleString();
     }
 }
+
+export default Response;
