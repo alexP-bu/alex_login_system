@@ -1,5 +1,5 @@
-import database from './mysql_config';
-import Response from './response';
+import database from './mysql_config.js';
+import Response from './Response.js';
 import QUERY from './query.js';
 import User from './User.js';
 import HTTPStatus from './HTTPStatus.js';
@@ -60,5 +60,3 @@ export const deleteUser = (req, res) => {
         }
     });
 };
-
-export default Controller;
