@@ -40,8 +40,8 @@ export const updateUser = (req, res) => {
         if(!results[0]){
             res.status(HTTPStatus.NOT_FOUND).send(new Response(HTTPStatus.NOT_FOUND.code, HTTPStatus.NOT_FOUND.status, 'Requested user not found'));
         }else{
-            database.query(QUERY.UPDATE_USER, [ Object.values(req.body), req.params.id ], (error, results) => {
-                if(!error){
+            database.query(QUERY.UPDATE_USER, [ Object.values(req.body), req.params.id ], (err, result) => {
+                if(!err){
                     res.status(HTTPStatus.OK).send(new Response(HTTPStatus.OK.code, HTTPStatus.OK.status, 'User updated'), { id: req.params.id, ...req.body});
                 }else{
                     res.status(HTTPStatus.INTERNAL_SERVER_ERROR).send(HTTPStatus.INTERNAL_SERVER_ERROR.code, HTTPStatus.INTERNAL_SERVER_ERROR.status, 'Error updating user with id')

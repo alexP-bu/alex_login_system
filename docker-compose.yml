@@ -5,6 +5,8 @@ services:
     build: ./
     ports:
       - "8080:8080"
+    depends_on:
+      - db
     
   db:
     image: mysql:8.0
@@ -14,20 +16,17 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_PASSWORD: secret
       MYSQL_USER: alex
-      MYSQL_DATABASE: data
+      MYSQL_DATABASE: serverdb
     ports:
       - 3306:3306
     expose:
       - 3306
     volumes:
       - ./db/init.sql:/docker-entrypoint-db.d/0_init.sql
-      - socialnetwork-db:/data/db
+      - $HOME/socialnetwork_database:/var/lib/mysql
     networks:
-      - internalnet
-
-volumes:
-  socialnetwork-db:
+      - socialnet
 
 networks:
-  internalnet:
+  socialnet:
     driver: bridge
