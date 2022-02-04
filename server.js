@@ -21,8 +21,8 @@ app.all('*', (req, res) => {
 });
 
 //router
+app.use(express.static(path.resolve('./views/')));
 router.get('/', (req, res) => {
-   app.use(express.static(path.resolve('./views/')));
    res.sendFile(path.resolve('./views/index.html'));
 });
 
