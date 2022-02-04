@@ -1,8 +1,8 @@
 CREATE DATABASE IF NOT EXISTS serverdb;
 USE serverdb;
 
-DROP TABLE IS EXISTS users;
-DROP TABLE IS EXISTS salts;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS salts;
 
 CREATE TABLE users(
     id INTEGER NOT NULL,
@@ -29,4 +29,3 @@ CREATE TABLE tokens(
     stamp DATETIME,
     PRIMARY KEY(id),
 );
-
