@@ -7,7 +7,7 @@ services:
       - "8080:8080"
     
   db:
-    image: mysql
+    image: mysql:8.0
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
@@ -15,7 +15,19 @@ services:
       MYSQL_PASSWORD: secret
       MYSQL_USER: alex
       MYSQL_DATABASE: data
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
     volumes:
+      - ./db/init.sql:/docker-entrypoint-db.d/0_init.sql
       - socialnetwork-db:/data/db
+    networks:
+      - internalnet
+
 volumes:
   socialnetwork-db:
+
+networks:
+  internalnet:
+    driver: bridge
