@@ -1,15 +1,15 @@
-import express from 'express';;
+import express from 'express';
 import {getUsers, getUser, createUser, deleteUser, updateUser} from "./Controller.js";
 
-const dbRoutes = express.Router();
+const userRouter = express.Router();
 
-dbRoutes.route('/')
+userRouter.route('/')
     .get(getUsers)
     .post(createUser);
 
-dbRoutes.route('/:id')
+userRouter.route('/:id')
     .get(getUser)
     .put(updateUser)
     .delete(deleteUser)
 
-export default dbRoutes;
+export default userRouter;
