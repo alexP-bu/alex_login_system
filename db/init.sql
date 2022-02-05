@@ -17,12 +17,11 @@ CREATE TABLE salts(
     id         BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     username   VARCHAR(254),
     salt       VARCHAR(254),
-    PRIMARY KEY (id),
-
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE tokens(
-    id         BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    id    BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     token VARCHAR(254),
     stamp DATETIME,
     PRIMARY KEY(id)
