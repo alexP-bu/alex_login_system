@@ -4,7 +4,7 @@ class User{
         this.username = username;
         this.firstname = firstName;
         this.email = email;
-        this.created_at =created_at;
+        this.created_at = created_at;
     }
 }
 

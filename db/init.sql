@@ -5,8 +5,8 @@ USE socialnetworkdb;
 CREATE TABLE users(
     id         BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     username   VARCHAR(255) DEFAULT NULL,
-    pwhash     VARCHAR(255) DEFAULT NULL,
     firstname  VARCHAR(255) DEFAULT NULL,
+    pwhash     VARCHAR(255) DEFAULT NULL,
     email      VARCHAR(255) DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),

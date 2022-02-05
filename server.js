@@ -8,19 +8,21 @@ import Response from './modules/Response.js';
 
 dotenv.config({path: './.env'});
 const app = express();
-const router = express.Router();
 const PORT = 8080;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-//routes
+//settings
+app.use(express.json());
 app.use('/users', userRouter);
-app.use('/', router);
-
-//router
 app.use(express.static(path.join(__dirname, '/views')));
-router.get('/', (req, res) => {
+
+//routing
+app.get('/', (req, res) => {
    res.sendFile(path.resolve('./views/index.html'));
+});
+app.all('*', (req, res) => {
+   res.status(HTTPStatus.NOT_FOUND.code).send(new Response(HTTPStatus.NOT_FOUND.code, HTTPStatus.NOT_FOUND.status, 'error routing'));
 });
 
 app.listen(8080, () => {

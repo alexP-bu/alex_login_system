@@ -5,9 +5,11 @@ services:
     build: ./
     image: socialnetwork-app-image
     ports:
-      - "8080:8080"
+      - 8080:8080
     depends_on:
       - db
+    networks:
+      - socialnet
     
   db:
     image: mysql:8.0

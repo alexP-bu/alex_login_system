@@ -1,6 +1,6 @@
 FROM node:17
 WORKDIR /app
-COPY package.json ./
+COPY package*.json ./
 RUN npm install
 
 ARG NODE_ENV
@@ -11,4 +11,4 @@ RUN if [ "$NODE_ENV" = "development" ]; \
 
 COPY ./ ./ 
 EXPOSE 8080
-CMD ["node", "server.js"]
+CMD ["npm", "run", "start"]
