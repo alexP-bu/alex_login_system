@@ -1,27 +1,24 @@
 import express from 'express';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import userRouter from './modules/userRouter.js';
 import HTTPStatus from './modules/HTTPStatus.js';
 import Response from './modules/Response.js';
 
-dotenv.config({path: '../.env'});
+dotenv.config({path: './.env'});
 const app = express();
 const router = express.Router();
-
 const PORT = 8080;
-
-//database setup
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 //routes
 app.use('/users', userRouter);
 app.use('/', router);
-app.all('*', (req, res) => {
-   res.status(HTTPStatus.NOT_FOUND).send(new Response(HTTPStatus.NOT_FOUND.status, HTTPStatus.NO_CONTENT.status, 'Path not found.'));
-});
 
 //router
-app.use(express.static(path.resolve('./views/')));
+app.use(express.static(path.join(__dirname, '/views')));
 router.get('/', (req, res) => {
    res.sendFile(path.resolve('./views/index.html'));
 });
