@@ -3,6 +3,7 @@ services:
   socialnetwork:
     container_name: socialnetwork-app
     build: ./
+    image: socialnetwork-app-image
     ports:
       - "8080:8080"
     depends_on:
