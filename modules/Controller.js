@@ -3,6 +3,7 @@ import Response from './Response.js';
 import QUERY from './query.js';
 import User from './User.js';
 import HTTPStatus from './HTTPStatus.js';
+import bcrypt from 'bcrypt';
 
 export const getUsers = (req, res) => {
     database.query(QUERY.SELECT_USERS, (error, results) => {
@@ -25,14 +26,20 @@ export const getUser = (req, res) => {
 };
 
 export const createUser = (req, res) => {
-    const pwhash = hash(req.body.password);
-    database.query(QUERY.CREATE_USER, Object.values(req.body), (error, results) => {
-        if(!results){
-            res.status(error.code).send(new Response(error.code, error.status, 'Error creating user'));
-        }else{ 
-            const user = {id: results.insertedId, ...req.body, created_at: new Date()};
-            res.status(HTTPStatus.OK.code).send(new Response(HTTPStatus.OK.code, HTTPStatus.OK.status), 'User created', { user })
-        }
+    let saltRounds = 10;
+    bcrypt.genSalt(saltRounds, (err, salt) => {
+        bcrypt.hash(req.body.password, salt, (err,hash) => {
+            req.body.password = hash;
+            console.log(req.body.password);
+            database.query(QUERY.CREATE_USER, Object.values(req.body), (error, results) => {
+                if(!results){
+                    res.status(error.code).send(new Response(error.code, error.status, 'Error creating user'));
+                }else{ 
+                    const user = {id: results.insertedId, ...req.body, created_at: new Date()};
+                    res.status(HTTPStatus.OK.code).send(new Response(HTTPStatus.OK.code, HTTPStatus.OK.status), 'User created', { user })
+                }
+            });
+        });
     });
 };
 

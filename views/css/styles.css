@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 :root{
-    font-size: 16px;
+    font-size: 18px;
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
 }
@@ -18,15 +18,14 @@ body{
 .newProfile{
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     row-gap: 5px;
     column-gap: 10px;
     grid-template-areas: 
     "formLabel formLabel formLabel"
     "errorText errorText errorText"
     "labelName inputName ."
-    "labelPassword inputPassword labelUnit"
-    "labelGender select ."
+    "labelPassword inputPassword ."
     ". . ."
     "submit submit submit"
     "loginText loginText loginText";
@@ -67,9 +66,6 @@ body{
     flex-direction: column;
     justify-content: flex-end;
 }
-.labelGender{
-    grid-area: labelGender;
-}
 .submitButton{
     grid-area: submit;
     border: 0.10rem solid black;
@@ -101,6 +97,7 @@ body{
     "formLabel formLabel"
     "invalidLoginText invalidLoginText"
     "labelName enterName"
+    "labelPassword inputPassword"
     ". ."
     "submitLogin submitLogin"
     "createText createText";
@@ -123,6 +120,10 @@ body{
     display: flex;
     align-items: center;
 }
+.labelPassword{
+    display: flex;
+    align-items: center;
+}
 .createText{
     grid-area: createText;
     font-size: 0.85rem;
@@ -130,6 +131,10 @@ body{
 }
 .invalidLoginText{
     grid-area: invalidLoginText;
+    text-align: center;
+}
+.inputPassword{
+    grid-area: inputPassword;
     text-align: center;
 }
 
