@@ -75,7 +75,7 @@ $(document).ready(function () {
                 if(error.status == 404){
                     $('.invalidLoginText').text('Username doesn\'t exist!');
                     $('.invalidLoginText').css('color', 'red');
-                }else if(error.status = 400){
+                }else if(error.status == 400){
                     $('.invalidLoginText').text('Invalid password!');
                     $('.invalidLoginText').css('color', 'red');
                 }
