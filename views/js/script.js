@@ -11,6 +11,8 @@ $(document).ready(function () {
                 password: $('.inputPassword').val()
             };
             console.log(JSON.stringify(sendInfo));
+            $('.inputName').val("");
+            $('.inputPassword').val("");
             //ajax request here to server
             $.ajax({
                 type: "POST",
@@ -20,21 +22,15 @@ $(document).ready(function () {
                 success: function (response) {
                     $('.errorText').text("Account successfully created! Please log in.");
                     $('.errorText').css("color", "green");
-                    $('.inputName').val("");
-                    $('.inputPassword').val("");
                 },
                 error: function (response){
                     $('.errorText').text("Error creating account. Username already exists");
                     $('.errorText').css("color", "red");
-                    $('.inputName').val("");
-                    $('.inputPassword').val("");
                 }
             });
         }else{
             $('.errorText').text("Please enter all fields!");
             $('.errorText').css("color", "red");
-            $('.inputName').val("");
-            $('.inputPassword').val("");
         }
     });
 
@@ -57,16 +53,18 @@ $(document).ready(function () {
     
     $('.submitLoginButton').click(function (e) { 
         e.preventDefault();
-        if(accountsMap.has($('.enterName').val())){
-            let retrievedAccount = accountsMap.get($('.enterName').val());
-            $('.newProfile').hide();
-            $('.loginProfile').hide();
-            setProfileText(retrievedAccount);
-            $('.profile').show();
-        }else{
-            $('.invalidLoginText').text("No profile found with this name!");
-            $('.invalidLoginText').css("color", "red");
-        }
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/users/login",
+            dataType: "application/json",
+            data: JSON.stringify({username: $('.enterName').val() , password: $('.inputPassword').val()}),
+            success: function (response) {
+                console.log(response);
+            },
+            error: (error) => {
+                console.log(error)
+            }
+        });
     });
     
 

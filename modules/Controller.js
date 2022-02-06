@@ -16,7 +16,7 @@ export const getUsers = (req, res) => {
 };
 
 export const getUser = (req, res) => {
-    database.query(QUERY.SELECT_USER, [ req.params.id ], (error, results) => {
+    database.query(QUERY.SELECT_USER, [ req.body.username ], (error, results) => {
         if(!results[0]){
             res.status(HTTPStatus.NOT_FOUND.code).send(new Response(HTTPStatus.NOT_FOUND.code, HTTPStatus.NOT_FOUND.status, 'User not found.'));
         }else{
@@ -44,7 +44,7 @@ export const createUser = (req, res) => {
 };
 
 export const updateUser = (req, res) => {
-    database.query(QUERY.SELECT_USER, [req.params.id], (error, results) => {
+    database.query(QUERY.SELECT_USER, [req.body.username], (error, results) => {
         if(!results[0]){
             res.status(HTTPStatus.NOT_FOUND.code).send(new Response(HTTPStatus.NOT_FOUND.code, HTTPStatus.NOT_FOUND.status, 'Requested user not found'));
         }else{
@@ -60,7 +60,7 @@ export const updateUser = (req, res) => {
 };
 
 export const deleteUser = (req, res) => {
-    database.query(QUERY.DELETE_USER, [req.params.id], (error, results) => {
+    database.query(QUERY.DELETE_USER, [req.body.username], (error, results) => {
         if(results.affectedRows > 0){
             res.status(HTTPStatus.OK.code).send(new Response(HTTPStatus.OK.code, HTTPStatus.OK.status, 'User deleted.', results[0]));
         }else{
@@ -68,3 +68,18 @@ export const deleteUser = (req, res) => {
         }
     });
 };
+
+export const loginUser = (req, res) => {
+    //check if user exists in database
+    database.query(QUERY.SELECT_USER, [req.body.username], (error, results) => {
+        if(!results[0]){
+            res.status(HTTPStatus.NOT_FOUND.code).send(new Response(HTTPStatus.NOT_FOUND.code, HTTPStatus.NOT_FOUND.status, 'User doesn\'t exist'));
+        }else{
+            //compare password
+            console.log(results);
+            //if(bcrypt.compare(req.body.password)){
+            //    //nothing
+            //}
+        }
+    });
+}
