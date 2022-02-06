@@ -1,10 +1,10 @@
 import mysql from 'mysql'
 
 const database = mysql.createPool({
-    host: '172.19.0.2',
+    host: '172.22.0.2',
     port: '3306',
-    user: 'username',
-    password: 'password',
+    user: 'root',
+    password: 'root',
     database: 'socialnetworkdb',
     connectionLimit: 10,
 });

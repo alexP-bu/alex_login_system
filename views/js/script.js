@@ -6,14 +6,11 @@ $(document).ready(function () {
         e.preventDefault();
         if(($('.inputName').val().trim() != '')
         && ($('.inputPassword').val() != '')    ){
-            var sendInfo= {
+            var sendInfo = {
                 username: $('.inputName').val(), 
                 password: $('.inputPassword').val()
             };
-            console.log(JSON.stringify(sendInfo));
-            $('.inputName').val("");
-            $('.inputPassword').val("");
-            //ajax request here to server
+            //ajax request to server
             $.ajax({
                 type: "POST",
                 url: "http://localhost:8080/users",
@@ -22,10 +19,17 @@ $(document).ready(function () {
                 success: function (response) {
                     $('.errorText').text("Account successfully created! Please log in.");
                     $('.errorText').css("color", "green");
+                    $('.inputName').val("");
+                    $('.inputPassword').val("");
                 },
                 error: function (response){
-                    $('.errorText').text("Error creating account. Username already exists");
-                    $('.errorText').css("color", "red");
+                    if(response.status == 400){
+                        $('.errorText').text("Username already exists.");
+                        $('.errorText').css("color", "red");
+                    }else{
+                        $('.errorText').text("Error creating account.");
+                        $('.errorText').css("color", "red");
+                    }
                 }
             });
         }else{
@@ -53,16 +57,28 @@ $(document).ready(function () {
     
     $('.submitLoginButton').click(function (e) { 
         e.preventDefault();
+        var sendInfo = {
+            username: $('.enterName').val(),
+            password: $('#inputPassword').val()
+        };
         $.ajax({
             type: "GET",
             url: "http://localhost:8080/users/login",
-            dataType: "application/json",
-            data: JSON.stringify({username: $('.enterName').val() , password: $('.inputPassword').val()}),
+            data: {
+                "username": sendInfo.username,
+                "password": sendInfo.password
+            },
             success: function (response) {
                 console.log(response);
             },
             error: (error) => {
-                console.log(error)
+                if(error.status == 404){
+                    $('.invalidLoginText').text('Username doesn\'t exist!');
+                    $('.invalidLoginText').css('color', 'red');
+                }else if(error.status = 400){
+                    $('.invalidLoginText').text('Invalid password!');
+                    $('.invalidLoginText').css('color', 'red');
+                }
             }
         });
     });

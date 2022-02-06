@@ -16,11 +16,19 @@ export const getUsers = (req, res) => {
 };
 
 export const getUser = (req, res) => {
-    database.query(QUERY.SELECT_USER, [ req.body.username ], (error, results) => {
+    database.query(QUERY.SELECT_USER, [req.query.username], (error, results) => {
         if(!results[0]){
             res.status(HTTPStatus.NOT_FOUND.code).send(new Response(HTTPStatus.NOT_FOUND.code, HTTPStatus.NOT_FOUND.status, 'User not found.'));
         }else{
-            res.status(HTTPStatus.OK.code).send(new Response(HTTPStatus.OK.code, HTTPStatus.OK.status, 'User retrieved', results[0]));
+            console.log(req.query.password);
+            console.log(results[0].pwhash);
+            bcrypt.compare(req.query.password, results[0].pwhash, (err, result) => {
+                if(result){
+                    res.status(HTTPStatus.OK.code).send(new Response(HTTPStatus.OK.code, HTTPStatus.OK.status, 'User retrieved', results[0]));
+                }else{
+                    res.status(HTTPStatus.BAD_REQUEST.code).send(new Response(HTTPStatus.BAD_REQUEST.code, HTTPStatus.BAD_REQUEST.status, 'Invalid password!'))
+                }
+            });
         }
     });
 };
@@ -28,12 +36,15 @@ export const getUser = (req, res) => {
 export const createUser = (req, res) => {
     let saltRounds = 10;
     bcrypt.genSalt(saltRounds, (err, salt) => {
-        bcrypt.hash(req.body.password, salt, (err,hash) => {
+        bcrypt.hash(req.body.password, salt, (error, hash) => {
             req.body.password = hash;
-            console.log(req.body.password);
-            database.query(QUERY.CREATE_USER, Object.values(req.body), (error, results) => {
+            database.query(QUERY.CREATE_USER, Object.values(req.body), (errors, results) => {
                 if(!results){
-                    res.status(error.code).send(new Response(error.code, error.status, 'Error creating user'));
+                    if(errors.code == 'ER_DUP_ENTRY'){
+                        res.status(HTTPStatus.BAD_REQUEST.code).send(new Response(HTTPStatus.BAD_REQUEST.code, HTTPStatus.BAD_REQUEST.status, 'User already exists'));
+                    }else{
+                        res.status(errors.code).send(new Response(errors.code, errors.status, 'Error creating user'));
+                    }
                 }else{ 
                     const user = {id: results.insertedId, ...req.body, created_at: new Date()};
                     res.status(HTTPStatus.OK.code).send(new Response(HTTPStatus.OK.code, HTTPStatus.OK.status), 'User created', { user })
@@ -68,18 +79,3 @@ export const deleteUser = (req, res) => {
         }
     });
 };
-
-export const loginUser = (req, res) => {
-    //check if user exists in database
-    database.query(QUERY.SELECT_USER, [req.body.username], (error, results) => {
-        if(!results[0]){
-            res.status(HTTPStatus.NOT_FOUND.code).send(new Response(HTTPStatus.NOT_FOUND.code, HTTPStatus.NOT_FOUND.status, 'User doesn\'t exist'));
-        }else{
-            //compare password
-            console.log(results);
-            //if(bcrypt.compare(req.body.password)){
-            //    //nothing
-            //}
-        }
-    });
-}

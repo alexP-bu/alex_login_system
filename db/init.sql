@@ -1,20 +1,21 @@
-
 CREATE DATABASE IF NOT EXISTS socialnetworkdb;
 USE socialnetworkdb;
 
 CREATE TABLE users(
-    username   VARCHAR(255) DEFAULT NOT NULL,
-    pwhash     VARCHAR(255) DEFAULT NOT NULL,
+    id         BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    username   VARCHAR(255) DEFAULT NULL,
     firstname  VARCHAR(255) DEFAULT NULL,
+    pwhash     VARCHAR(255) DEFAULT NULL,
     email      VARCHAR(255) DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (username),
+    PRIMARY KEY (id),
     CONSTRAINT UQ_Users_Username UNIQUE (username)
 );
 
 CREATE TABLE tokens(
-    token    VARCHAR(255) DEFAULT NOT NULL,
-    username VARCHAR(255) DEFAULT NOT NULL,
-    stamp    DATETIME DEFAULT NOT NULL,
-    PRIMARY KEY(username),
+    id    BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    username VARCHAR(255),
+    token VARCHAR(255),
+    stamp DATETIME,
+    PRIMARY KEY(id)
 );
