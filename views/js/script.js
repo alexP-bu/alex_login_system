@@ -1,23 +1,38 @@
 $(document).ready(function () {
 
-    $('.loginProfile').hide();
-    $('.profile').hide();
-
-    const accountsMap = new Map();
-
     $('.submitButton').click(function (e) { 
         e.preventDefault();
         if(($('.inputName').val().trim() != '')
-        && ($('.inputHeight').val() != '')    ){
-            var account = new Person($('.inputName').val(), $('.inputHeight').val(), $('.gender').find(":selected").text());
-            accountsMap.set(account.getName(), account);
-            $('.errorText').text("Account Created! Please log in.");
-            $('.errorText').css("color", "green");
-            $('.inputName').val("");
-            $('.inputHeight').val("");
+        && ($('.inputPassword').val() != '')    ){
+            var sendInfo= {
+                username: $('.inputName').val(), 
+                password: $('.inputPassword').val()
+            };
+            console.log(JSON.stringify(sendInfo));
+            //ajax request here to server
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/users",
+                data: JSON.stringify(sendInfo),
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    $('.errorText').text("Account successfully created! Please log in.");
+                    $('.errorText').css("color", "green");
+                    $('.inputName').val("");
+                    $('.inputPassword').val("");
+                },
+                error: function (response){
+                    $('.errorText').text("Error creating account. Username already exists");
+                    $('.errorText').css("color", "red");
+                    $('.inputName').val("");
+                    $('.inputPassword').val("");
+                }
+            });
         }else{
             $('.errorText').text("Please enter all fields!");
             $('.errorText').css("color", "red");
+            $('.inputName').val("");
+            $('.inputPassword').val("");
         }
     });
 
@@ -35,7 +50,7 @@ $(document).ready(function () {
         $('.loginProfile').hide();
         $('.newProfile').show();
         $('.inputName').val("");
-        $('.inputHeight').val("");
+        $('.inputPassword').val("");
     });
 
     $('.submitLoginButton').click(function (e) { 
@@ -63,7 +78,7 @@ $(document).ready(function () {
     function setProfileText(account){
         $('.profileName').text(account.getName());
         $('.profileGender').text(account.getGender());
-        $('.profileHeight').text(account.getHeight());
+        $('.profilePassword').text(account.getPassword());
         $('.profileHydrated').text(account.getHydrated());
         $('.profileBreathing').text(account.getBreathing());
         $('.profileBooty').text(account.getBooty());
@@ -72,70 +87,9 @@ $(document).ready(function () {
     function unsetProfileText(){
         $('.profileName').text("");
         $('.profileGender').text("");
-        $('.profileHeight').text("");
+        $('.profilePassword').text("");
         $('.profileHydrated').text("");
         $('.profileBreathing').text("");
         $('.profileBooty').text("");
     }
 });
-
-class Person{
-    #name;
-    #gender;
-    #height;
-    #hydrated;
-    #breathing;
-    #booty;
-
-    constructor(name, height, gender){
-        this.#name = name;
-        this.#height = height;
-        this.#gender = gender;
-        if((this.#name.toLowerCase() == "karen") 
-            && (this.#height == "163")
-            && (this.#gender == 'Female')){
-            this.#booty = true;
-        }else{
-            this.#booty = false;
-        }
-        this.#hydrated = true;
-        this.#breathing = true;
-    }
-
-    getName(){
-        return this.#name;
-    }
-
-    getHeight(){
-        return this.#height;
-    }
-
-    getGender(){
-        return this.#gender;
-    }
-
-    getHydrated(){
-        if(this.#hydrated){
-            return "Yes";
-        }else{
-            return "No";
-        }
-    }
-
-    getBreathing(){
-        if(this.#breathing){
-            return "Yes";
-        }else{
-            return "No";
-        }
-    }
-
-    getBooty(){
-        if(this.#booty){
-            return "Yes";
-        }else{
-            return "No";
-        }
-    }
-
-};

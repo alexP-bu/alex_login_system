@@ -25,7 +25,7 @@ body{
     "formLabel formLabel formLabel"
     "errorText errorText errorText"
     "labelName inputName ."
-    "labelHeight inputHeight labelUnit"
+    "labelPassword inputPassword labelUnit"
     "labelGender select ."
     ". . ."
     "submit submit submit"
@@ -50,14 +50,14 @@ body{
 .labelName{
     grid-area: labelName;
 }
-.labelHeight{
-    grid-area: labelHeight;
+.labelPassword{
+    grid-area: labelPassword;
 }
 .inputName{
     grid-area: inputName;
 }
-.inputHeight{
-    grid-area: inputHeight;
+.inputPassword{
+    grid-area: inputPassword;
 }
 .labelUnit{
     grid-area: labelUnit;

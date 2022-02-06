@@ -25,9 +25,10 @@ export const getUser = (req, res) => {
 };
 
 export const createUser = (req, res) => {
+    const pwhash = hash(req.body.password);
     database.query(QUERY.CREATE_USER, Object.values(req.body), (error, results) => {
         if(!results){
-            res.status(HTTPStatus.code).send(new Response(error.code, error.status, 'Error creating user'));
+            res.status(error.code).send(new Response(error.code, error.status, 'Error creating user'));
         }else{ 
             const user = {id: results.insertedId, ...req.body, created_at: new Date()};
             res.status(HTTPStatus.OK.code).send(new Response(HTTPStatus.OK.code, HTTPStatus.OK.status), 'User created', { user })
