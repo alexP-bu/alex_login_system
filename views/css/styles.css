@@ -138,19 +138,28 @@ body{
     text-align: center;
 }
 
+.profile{
+    height: 100%;
+    width: 100%;
+}
+
 .profile ul{
+    width: 100%;
     list-style-type: none;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border: 2px solid green;
 }
 .profile h3{
     font-size: 1.5rem;
     text-decoration: underline;
     text-underline-offset: 0.5rem;
+    text-align: center;
 }
 .profile li p{
-    display: inline-block
+    display: inline-block;
+    border: 2px solid red;
 }
 .profile li{
     display: flex;

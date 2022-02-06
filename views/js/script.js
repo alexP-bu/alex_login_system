@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
     $('.loginProfile').hide();
+    $('.profile').hide();
 
     $('.submitButton').click(function (e) { 
         e.preventDefault();
@@ -69,7 +70,11 @@ $(document).ready(function () {
                 "password": sendInfo.password
             },
             success: function (response) {
-                console.log(response);
+                $('.enterName').val("");
+                $('#inputPassword').val("");
+                $('.loginProfile').hide();
+                $('.profile').show();
+                $('.profileName').text(response.data.username);
             },
             error: (error) => {
                 if(error.status == 404){
