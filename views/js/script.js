@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+    $('.loginProfile').hide();
+
     $('.submitButton').click(function (e) { 
         e.preventDefault();
         if(($('.inputName').val().trim() != '')
@@ -38,10 +40,10 @@ $(document).ready(function () {
 
     $('.loginTextClick').click(function (e) { 
         e.preventDefault();
-        $('.errorText').text("");
+        $('.inputName').val("");
+        $('.inputPassword').val("");
         $('.newProfile').hide();
         $('.loginProfile').show();
-        $('.enterName').val("");
     });
 
     $('.createTextClick').click(function (e) { 
@@ -52,7 +54,7 @@ $(document).ready(function () {
         $('.inputName').val("");
         $('.inputPassword').val("");
     });
-
+    
     $('.submitLoginButton').click(function (e) { 
         e.preventDefault();
         if(accountsMap.has($('.enterName').val())){
@@ -66,7 +68,9 @@ $(document).ready(function () {
             $('.invalidLoginText').css("color", "red");
         }
     });
+    
 
+    /* TODO DATABASE INTEGRATION
     $('.logoutTextClick').click(function (e) { 
         e.preventDefault();
         unsetProfileText();
@@ -92,4 +96,5 @@ $(document).ready(function () {
         $('.profileBreathing').text("");
         $('.profileBooty').text("");
     }
+    */
 });
