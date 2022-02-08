@@ -25,6 +25,7 @@ app.all('*', (req, res) => {
    res.status(HTTPStatus.NOT_FOUND.code).send(new Response(HTTPStatus.NOT_FOUND.code, HTTPStatus.NOT_FOUND.status, 'error routing'));
 });
 
+//listener for console
 app.listen(8080, () => {
    console.log('listening on port 8080');
 });
