@@ -138,18 +138,22 @@ body{
     text-align: center;
 }
 
+
 .profile{
     height: 100%;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-
 .profile ul{
-    width: 100%;
+    width: 50%;
+    height: 50%;
     list-style-type: none;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    border: 2px solid green;
+    border: 2px solid black;
 }
 .profile h3{
     font-size: 1.5rem;
@@ -164,7 +168,6 @@ body{
 .profile li{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
 }
 .profile li:first-child{
     margin-top: 1vh;
@@ -174,4 +177,6 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: auto;
+    border: 2px solid blue;
 }

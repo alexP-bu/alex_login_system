@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     $('.loginProfile').hide();
-    $('.profile').hide();
+    //$('.profile').hide();
 
     $('.submitButton').click(function (e) { 
         e.preventDefault();
@@ -18,7 +18,7 @@ $(document).ready(function () {
                 data: JSON.stringify(sendInfo),
                 contentType: "application/json; charset=utf-8",
                 success: function (response) {
-                    $('.errorText').text("Account successfully created! Please log in.");
+                    $('.errorText').text("Account created! Please log in.");
                     $('.errorText').css("color", "green");
                     $('.inputName').val("");
                     $('.inputPassword').val("");
